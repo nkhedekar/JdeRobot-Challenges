@@ -4,7 +4,7 @@ This repository contains my solutions to the JDERobot Challenges for the GSoC 20
 
 ## installation
 
-The details of the challenge itself can be found in [this](installation/gsoc2019-installation_test.pdf) file. 
+The details of the challenge itself can be found in [this](installation/gsoc2019-installation_test.pdf) file.
 
 ## python
 
@@ -20,8 +20,29 @@ This package requires the standard python3 library and numpy to be intalled.
 
 To run the game, run `python3 sample_app.py` from the python directory and follow the instructions on the terminal.
 
-To run the tests, run python3 tests.py from the python directory
+To run the tests, run `python3 tests.py -v` from the python directory
 
 ### Proof of working
 
 Some videos of the working code are available at the following links:
+
+Testing:
+
+```bash
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.015s
+
+OK
+zeus@Olympus:~/Desktop/workspaces/jderobot-challenges/python$ python3 tests.py -v
+test_created_grid (__main__.TestCgolMethods) ... ok
+test_oscillators (__main__.TestCgolMethods) ... ok
+test_pattern_placement (__main__.TestCgolMethods) ... ok
+test_spaceships (__main__.TestCgolMethods) ... ok
+test_still_life (__main__.TestCgolMethods) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+OK
+```
