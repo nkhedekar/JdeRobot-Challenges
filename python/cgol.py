@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import json
 import time
 import numpy as np
@@ -9,18 +8,19 @@ class CGOL:
 	vals = [ON, OFF]
 
 	# Still Lifes
-	BLOCK = np.array([[1,1],[1,1]])
-	BEEHIVE = np.array([[0,1,1,0],[1,0,0,1],[0,1,1,0]])
-	TUB = np.array([[0,1,0],[1,0,1],[0,1,0]])
+	BLOCK = np.array([[1, 1], [1, 1]])
+	BEEHIVE = np.array([[0, 1, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0]])
+	TUB = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
 
 	# Oscillators
-	BLINKER = np.array([[0,0,0],[1,1,1],[0,0,0]])
-	TOAD = np.array([[0,0,0,0],[0,1,1,1],[1,1,1,0],[0,0,0,0]])
-	BEACON = np.array([[1,1,0,0],[1,0,0,0],[0,0,0,1],[0,0,1,1]])
+	BLINKER = np.array([[0, 0, 0], [1, 1, 1], [0, 0, 0]])
+	TOAD = np.array([[0, 0, 0, 0], [0, 1, 1, 1], [1, 1, 1, 0], [0, 0, 0, 0]])
+	BEACON = np.array([[1, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 1]])
 
 	# Spaceships
-	GLIDER = np.array([[0,0,1],[1,0,1],[0,1,1]])
-	LIGHTSPACESHIP = np.array([[0,0,1,1,0],[1,1,0,1,1],[1,1,1,1,0],[0,1,1,0,0]])
+	GLIDER = np.array([[0, 0, 1], [1, 0, 1], [0, 1, 1]])
+	LIGHTSPACESHIP = np.array([[0, 0, 1, 1, 0], [1, 1, 0, 1, 1], [
+	                          1, 1, 1, 1, 0], [0, 1, 1, 0, 0]])
 
 	def __init__(self):
 		with open('config.json') as config_fd:
@@ -28,14 +28,13 @@ class CGOL:
 		self.width = np.clip(config['width'], 8, 30)
 		self.height = np.clip(config['height'], 8, 30)
 		self.grid = np.zeros((self.width, self.height))
-		self.wrap_around = config['wrap_around']
 		self.generation = 1
 		np.random.seed = config['random_seed']
-		
+
 	def random_grid(self):
 		self.grid = np.random.choice(self.vals, size=(
 			self.width, self.height), p=[1./3, 2./3])
-	
+
 	def add_object(self, ob, i, j):
 		w, h = ob.shape
 		i = np.clip(i, 0, self.width - w - 1)
@@ -43,17 +42,14 @@ class CGOL:
 		self.grid[i:i+w, j:j+h] = ob
 
 	def sum_of_neighbors(self, i, j):
-		if self.wrap_around:
-			return int(self.grid[(i-1) % self.width][(j-1) % self.height] +
-                            self.grid[(i-1) % self.width][(j) % self.height] +
-                            self.grid[(i-1) % self.width][(j+1) % self.height] +
-                            self.grid[(i) % self.width][(j-1) % self.height] +
-                            self.grid[(i) % self.width][(j+1) % self.height] +
-                            self.grid[(i+1) % self.width][(j-1) % self.height] +
-                            self.grid[(i+1) % self.width][(j) % self.height] +
-                            self.grid[(i+1) % self.width][(j+1) % self.height])
-		else:
-			pass
+		return int(self.grid[(i-1) % self.width][(j-1) % self.height] +
+                    self.grid[(i-1) % self.width][(j) % self.height] +
+                    self.grid[(i-1) % self.width][(j+1) % self.height] +
+                    self.grid[(i) % self.width][(j-1) % self.height] +
+                    self.grid[(i) % self.width][(j+1) % self.height] +
+                    self.grid[(i+1) % self.width][(j-1) % self.height] +
+                    self.grid[(i+1) % self.width][(j) % self.height] +
+                    self.grid[(i+1) % self.width][(j+1) % self.height])
 
 	def update_grid(self):
 		new_grid = self.grid.copy()
@@ -68,9 +64,13 @@ class CGOL:
 						new_grid[i][j] = self.ON
 		self.grid = new_grid
 		self.generation += 1
-	
+
 	def get_grid(self):
 		return self.grid
+	
+	def set_grid(self, grid):
+		self.grid = grid
+		self.width, self.height = grid.shape
 
 	def val_to_char(self, val):
 		return "*" if val == self.ON else " "
@@ -86,10 +86,9 @@ class CGOL:
 			print(" ".join(map(self.val_to_char, row)))
 
 	def run_once(self):
-		print("Number of Live Cells: ", int(np.sum(self.grid)))
-		print("Number of Dead Cells: ", int(
-			self.width*self.height - np.sum(self.grid)))
-		print("Generation: ", self.generation)
+		print("Number of Live Cells: ", np.sum(self.grid), " ")
+		print("Number of Dead Cells: ", int(self.width*self.height - np.sum(self.grid)))
+		print("Generation Number: ", self.generation)
 		self.display_grid()
 		self.move_cursor_up()
 		self.update_grid()

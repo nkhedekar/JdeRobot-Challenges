@@ -6,8 +6,7 @@ print("Welcome to Nikhil Khedekar's solution for the Python Challenge of JDERobo
 
 t = int(input("Please enter the time step value in ms (int): "))
 t = np.clip(t, 50, 1000)
-max_iterations = int(
-	input("Please enter the maximum number of iterations (int): "))
+max_iterations = int(input("Please enter the maximum number of iterations (int): "))
 max_iterations = np.clip(max_iterations, 10, 1000)
 
 g = CGOL()
