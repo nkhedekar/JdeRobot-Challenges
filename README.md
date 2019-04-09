@@ -6,6 +6,8 @@ This repository contains my solutions to the JDERobot Challenges for the GSoC 20
 
 The details of the challenge itself can be found in [this](installation/gsoc2019-installation_test.pdf) file.
 
+The terminal dump of the installation is provided in [installation.log](installation/install.log) and a screenshot of the working cameraview and cameraserver are provided in [cam_proof.png](installation/cam_proof.png).
+
 ## python
 
 The details of the challenge itself can be found in [this](python/gsoc2019-python_test.pdf) file.
@@ -25,6 +27,9 @@ To run the tests, run `python3 tests.py -v` from the python directory
 ### Proof of working
 
 Some videos of the working code are available at the following links:
+
+- [Link1](https://youtu.be/dzcdh2ZqXl0)
+- [Link2](https://youtu.be/mSpgKjWAkdI)
 
 Testing:
 
