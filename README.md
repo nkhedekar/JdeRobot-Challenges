@@ -1,14 +1,14 @@
-# jderobot-challenges
+# JdeRobot-Challenges
 
 This repository contains my solutions to the JDERobot Challenges for the GSoC 2019 Application.
 
-## installation
+## Installation
 
 The details of the challenge itself can be found in [this](installation/gsoc2019-installation_test.pdf) file.
 
 The terminal dump of the installation is provided in [installation.log](installation/install.log) and a screenshot of the working cameraview and cameraserver are provided in [cam_proof.png](installation/cam_proof.png).
 
-## python
+## Python
 
 The details of the challenge itself can be found in [this](python/gsoc2019-python_test.pdf) file.
 
@@ -16,7 +16,7 @@ The game has been implemented as a module in [cgol.py](python/cgol.py) with the 
 
 ### Dependancies
 
-This package requires the standard python3 library and numpy to be intalled.
+This package requires the standard python3 libraries and numpy to be intalled.
 
 ### Usage
 
